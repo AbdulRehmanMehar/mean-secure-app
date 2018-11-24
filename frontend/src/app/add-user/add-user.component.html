@@ -1,0 +1,73 @@
+<form class="container" *ngIf="!error" [formGroup]="addUser" (ngSubmit)="onSubmit()">
+  <h5>Add User</h5>
+  <div class="form-group">
+    <label for="name">Full Name</label>
+    <input type="text" formControlName="name" id="name" class="form-control" placeholder="Enter name"
+    [ngClass]="{'is-invalid' : addUser.get('name').touched &&
+       (addUser.get('name').errors?.minlength || addUser.get('name').errors?.required || addUser.get('name').errors?.backend)}">
+    <div *ngIf="addUser.get('name').touched" class="form-text text-danger">
+      <span *ngIf="addUser.get('name').errors?.required">This Field can't be empty.</span>
+      <span *ngIf="addUser.get('name').errors?.minlength">
+        Name must {{addUser.get('name').errors?.minlength.requiredLength}} or more characters long.
+      </span>
+      <span *ngIf="addUser.get('name').errors?.backend">{{addUser.get('name').errors?.backend.message}}.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" id="email" class="form-control" formControlName="email" placeholder="Enter email"
+      [ngClass]="{'is-invalid' : addUser.get('email').touched &&
+            (addUser.get('email').errors?.email || addUser.get('email').errors?.required || addUser.get('email').errors?.backend)}">
+    <div class="form-text text-danger" *ngIf="addUser.get('email').touched" >
+      <span *ngIf="addUser.get('email').errors?.email">Please enter a valid email address.</span>
+      <span *ngIf="addUser.get('email').errors?.required">This field is required.</span>
+      <span *ngIf="addUser.get('email').errors?.backend">{{addUser.get('email').errors?.backend.message}}.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="about">Describe your personality</label>
+    <textarea id="about" class="form-control" formControlName="about" rows="7" placeholder="I am very good at Programming"
+    [ngClass]="{'is-invalid' : addUser.get('about').touched &&
+      (addUser.get('about').errors?.minlength || addUser.get('about').errors?.required || addUser.get('about').errors?.backend)}"></textarea>
+    <div *ngIf="addUser.get('about').touched" class="form-text text-danger">
+      <span *ngIf="addUser.get('about').errors?.required">This field is required.</span>
+      <span *ngIf="addUser.get('about').errors?.minlength">
+        Description must be  {{ addUser.get('about').errors?.minlength.requiredLength }} or more characters long.
+      </span>
+      <span *ngIf="addUser.get('about').errors?.backend">{{addUser.get('about').errors?.backend.message}}.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="twitterURL">Twitter Profile URL</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroupPrepend3">https://twitter.com/</span>
+      </div>
+      <input type="text" class="form-control" id="twitterURL" formControlName="twitterURL" placeholder="Username"
+        [ngClass]="{'is-invalid': addUser.get('twitterURL').touched && addUser.get('twitterURL').errors?.backend}">
+    </div>
+    <div class="text-danger form-text" *ngIf="addUser.get('twitterURL').errors?.backend">
+      {{ addUser.get('twitterURL').errors?.backend.message }}.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="gplusURL">Google Profile URL</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroupPrepend3">https://plus.google.com/</span>
+      </div>
+      <input type="text" class="form-control" id="gplusURL" formControlName="gplusURL" placeholder="Username" [ngClass]="{'is-invalid': addUser.get('gplusURL').touched && addUser.get('gplusURL').errors?.backend}">
+
+    </div>
+    <div class="text-danger form-text" *ngIf="addUser.get('gplusURL').errors?.backend">
+      {{ addUser.get('gplusURL').errors?.backend.message }}.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!addUser.valid">Submit</button>
+</form>
+
+<div class="container" *ngIf="error">
+  {{error | json}}
+</div>

@@ -1,0 +1,22 @@
+<div class="container" *ngIf="users && !error">
+  <div *ngFor="let user of users">
+    <div class="card mt-2">
+      <div class="card-header">{{user.email}}</div>
+      <div class="card-body">
+        <h5 class="card-title">{{user.name}}</h5>
+        <p class="card-text">{{user.about}}</p>
+        <p *ngIf="user.socialLinks.facebook || user.socialLinks.gplus || user.socialLinks.twitter">
+          <a target="_blank" href="{{user.socialLinks.facebook}}" *ngIf="user.socialLinks.facebook">Facebook</a>
+          <a target="_blank" href="{{user.socialLinks.gplus}}" *ngIf="user.socialLinks.gplus">Google Plus</a>
+          <a target="_blank" href="{{user.socialLinks.twitter}}" *ngIf="user.socialLinks.twitter">Twitter</a>
+        </p>
+        <a [routerLink]="['edit', user._id]" class="btn btn-primary d-inline-block mr-2">Edit</a>
+        <a (click)="delete(user._id)" class="btn btn-danger d-inline-block">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="error">
+  {{error | json}}
+</div>

@@ -1,0 +1,58 @@
+<form class="container" *ngIf="!error" [formGroup]="editUser" (ngSubmit)="onSubmit()">
+  <h5>Edit User</h5>
+  <div class="form-group">
+    <label for="name">Full Name</label>
+    <input type="text" formControlName="name" id="name" class="form-control" placeholder="Enter name" [ngClass]="{'is-invalid' : editUser.get('name').touched &&
+       (editUser.get('name').errors?.minlength || editUser.get('name').errors?.backend)}">
+    <div *ngIf="editUser.get('name').touched" class="form-text text-danger">
+      <span *ngIf="editUser.get('name').errors?.minlength">
+        Name must {{editUser.get('name').errors?.minlength.requiredLength}} or more characters long.
+      </span>
+      <span *ngIf="editUser.get('name').errors?.backend">{{editUser.get('name').errors?.backend.message}}.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" id="email" class="form-control" formControlName="email" placeholder="Enter email" [ngClass]="{'is-invalid' : editUser.get('email').touched &&
+            (editUser.get('email').errors?.email || editUser.get('email').errors?.backend)}">
+    <div class="form-text text-danger" *ngIf="editUser.get('email').touched">
+      <span *ngIf="editUser.get('email').errors?.email">Please enter a valid email address.</span>
+      <span *ngIf="editUser.get('email').errors?.backend">{{editUser.get('email').errors?.backend.message}}.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="about">Describe your personality</label>
+    <textarea id="about" class="form-control" formControlName="about" rows="7" placeholder="I am very good at Programming"
+      [ngClass]="{'is-invalid' : editUser.get('about').touched &&
+      (editUser.get('about').errors?.minlength || editUser.get('about').errors?.backend)}"></textarea>
+    <div *ngIf="editUser.get('about').touched" class="form-text text-danger">
+      <span *ngIf="editUser.get('about').errors?.minlength">
+        Description must be {{ editUser.get('about').errors?.minlength.requiredLength }} or more characters long.
+      </span>
+      <span *ngIf="editUser.get('about').errors?.backend">{{editUser.get('about').errors?.backend.message}}.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="twitterURL">Twitter Profile URL</label>
+      <input type="text" class="form-control" id="twitterURL" formControlName="twitterURL" placeholder="Username"
+        [ngClass]="{'is-invalid': editUser.get('twitterURL').touched && editUser.get('twitterURL').errors?.backend}">
+    <div class="text-danger form-text" *ngIf="editUser.get('twitterURL').errors?.backend">
+      {{ editUser.get('twitterURL').errors?.backend.message }}.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="gplusURL">Google Profile URL</label>
+      <input type="text" class="form-control" id="gplusURL" formControlName="gplusURL" placeholder="Username" [ngClass]="{'is-invalid': editUser.get('gplusURL').touched && editUser.get('gplusURL').errors?.backend}">
+    <div class="text-danger form-text" *ngIf="editUser.get('gplusURL').errors?.backend">
+      {{ editUser.get('gplusURL').errors?.backend.message }}.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!editUser.valid">Submit</button>
+</form>
+
+
+<div class="container" *ngIf="error">
+  {{ error | json }}
+</div>
