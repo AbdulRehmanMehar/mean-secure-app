@@ -1,0 +1,23 @@
+{
+  "name": "mean-auth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "author": "Abdul Rehman",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-rate-limit": "^3.3.2",
+    "express-validator": "^5.3.0",
+    "helmet": "^3.15.0",
+    "mongoose": "^5.3.13",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  }
+}
