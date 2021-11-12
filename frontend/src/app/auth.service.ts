@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
+  private serverURI: string = 'https://mean-secure-app.herokuapp.com/';
+  
   constructor(private http: HttpClient) { }
 
   register(user) {
@@ -19,7 +21,7 @@ export class AuthService {
       user.twitterURL = 'https://twitter.com/' + user.twitterURL;
     }
     return new Promise((resolve, reject) => {
-      return this.http.post('http://localhost:3000/users/add', user)
+      return this.http.post(this.serverURI + '/users/add', user)
         .toPromise()
         .then(response => resolve(response))
         .catch(error => reject(error));
@@ -28,7 +30,7 @@ export class AuthService {
 
   getById(id) {
     return new Promise((resolve, reject) => {
-      return this.http.get('http://localhost:3000/users/' + id)
+      return this.http.get(this.serverURI + '/users/' + id)
         .toPromise()
         .then(resp => resolve(resp['data']))
         .catch(error => reject(error));
@@ -37,7 +39,7 @@ export class AuthService {
 
   getAll() {
     return new Promise((resolve, reject) => {
-      return this.http.get('http://localhost:3000/users')
+      return this.http.get(this.serverURI + '/users')
         .toPromise()
         .then(resp => resolve(resp))
         .catch(error => reject(error));
@@ -46,7 +48,7 @@ export class AuthService {
 
   deleteOne(id) {
     return new Promise((resolve, reject) => {
-      return this.http.delete('http://localhost:3000/users/' + id) // makes delete request to backend
+      return this.http.delete(this.serverURI + '/users/' + id) // makes delete request to backend
         .toPromise()
         .then(resp => resolve(resp))
         .catch(error => reject(error));
@@ -55,7 +57,7 @@ export class AuthService {
 
   updateOne(user) { // Updates a user by its id
     return new Promise((resolve, reject) => {
-      return this.http.patch('http://localhost:3000/users/' + user.id, user) // makes patch request to backend
+      return this.http.patch(this.serverURI + '/users/' + user.id, user) // makes patch request to backend
         .toPromise()
         .then(resp => resolve(resp))
         .catch(error => reject(error));
