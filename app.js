@@ -11,7 +11,7 @@ const app = express(); // App initialization
 
 const usersController = require('./routes/users'); // User Controller
 
-mongoose.connect('mongodb://127.0.0.1:27017/meanApp', { useNewUrlParser: true }); // MongoDB Connection
+mongoose.connect(process.env.DB || 'mongodb://127.0.0.1:27017/meanApp', { useNewUrlParser: true }); // MongoDB Connection
 
 app.disable('x-powered-by');
 app.use(new RateLimiter({
@@ -79,4 +79,4 @@ app.use(express.static(path.join(__dirname, 'public'))); // Static Folder where 
 
 app.use('/users/', usersController); // register the user Controller 
 
-app.listen(3000, () => console.log('server started on port 3000')); // Starts app and logs data on console
+app.listen(process.env.PORT || 3000, () => console.log('server started on port 3000')); // Starts app and logs data on console
