@@ -38,16 +38,16 @@ app.use(
   helmet.contentSecurityPolicy({
     // Specify directives as normal.
     directives: {
-      defaultSrc: ["'self'", "default.com"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      styleSrc: ["style.com"],
+      defaultSrc: ["'self'", "mean-secure-app.herokuapp.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "stackpath.bootstrapcdn.com"],
       fontSrc: ["'self'", "fonts.com"],
-      imgSrc: ["img.com", "data:"],
-      sandbox: ["allow-forms", "allow-scripts"],
-      reportUri: "/report-violation",
-      objectSrc: ["'none'"],
-      upgradeInsecureRequests: true,
-      workerSrc: false // This is not set.
+      imgSrc: ["'self'", "mean-secure-app.herokuapp.com", "data:"],
+      //sandbox: ["allow-forms", "allow-scripts"],
+      //reportUri: "/report-violation",
+      //objectSrc: ["'none'"],
+      //upgradeInsecureRequests: true,
+      //workerSrc: false // This is not set.
     },
 
     // This module will detect common mistakes in your directives and throw errors
